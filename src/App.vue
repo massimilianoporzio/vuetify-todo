@@ -38,7 +38,7 @@
     <v-app-bar app prominent
         color="primary"
         dark
-        src="mountains.jpg"
+        src="waves.jpg"
 
 
     >
