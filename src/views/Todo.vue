@@ -7,21 +7,21 @@
         label="Add Task"
         append-icon="mdi-plus-thick"
         v-model="newTaskTitle"
-        @click:append="addTask()"
-        @keyup.enter="addTask()"
+        @click:append="addTask"
+        @keyup.enter="addTask"
     ></v-text-field>
 
-    <v-list v-if="tasks.length"
+    <v-list v-if="$store.state.tasks.length"
         flat
         class="pt-0"
     >
 
-      <div v-for="task in tasks"
+      <div v-for="task in $store.state.tasks"
            :key="task.id" >
         <v-list-item :class="{'blue lighten-5':task.done}">
           <template>
             <v-list-item-action>
-              <v-checkbox @click="doneTask(task.id)"
+              <v-checkbox @click="$store.commit('doneTask',task.id)"
                   :input-value="task.done"
                   color="primary"
               ></v-checkbox>
@@ -33,7 +33,7 @@
             </v-list-item-content>
 
             <v-list-item-action>
-              <v-btn icon @click="deleteTask(task.id)">
+              <v-btn icon @click="$store.commit('deleteTask',task.id)">
                 <v-icon color="primary lighten-1">mdi-delete</v-icon>
               </v-btn>
             </v-list-item-action>
@@ -65,48 +65,13 @@ export default {
   name: "Todo",
   methods:{
     addTask() {
-      if(this.newTaskTitle !== '')
-      {
-        let newTask = {
-          id: Date.now(),
-          title: this.newTaskTitle,
-          done: false
-        }
-        this.tasks.push(newTask)
-        this.newTaskTitle = '' //clearing
-      }
-
-    },
-    doneTask(id) {
-
-      let task = this.tasks.filter(t => t.id === id)[0] // ritorna un array prendo il primo (dovrebbe essere solo 1)
-      task.done = !task.done //toggling
-
-    },
-    deleteTask(id) {
-      console.log("DELETE TASK #:",id)
-      this.tasks = this.tasks.filter(t => t.id !== id) //tengo solo i task con id DIVERSI da l'id che ho passato
+      this.$store.commit('addTask', this.newTaskTitle)
+      this.newTaskTitle = ''
     }
   },
   data: () => ({
-    newTaskTitle : '',
-    tasks: [
-      // {
-      //   id: 1,
-      //   title: 'Wake up',
-      //   done: false
-      // },
-      // {
-      //   id: 2,
-      //   title: 'Get bananas',
-      //   done: true
-      // },
-      // {
-      //   id: 3,
-      //   title: 'Eat bananas',
-      //   done: false
-      // }
-    ],
+    newTaskTitle : ''
+
   }),
 }
 </script>
