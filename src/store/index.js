@@ -68,7 +68,14 @@ export default new Vuex.Store({
       deleteTask(state, id) {
         // console.log("DELETE TASK #:",id)
         state.tasks = state.tasks.filter(t => t.id !== id) //tengo solo i task con id DIVERSI da l'id che ho passato
-      }
+      },
+    updateTaskTitle(state,payload){
+      let id = payload.id
+      let newTaskTitle = payload.title
+      let task = state.tasks.filter(t => t.id === id)[0] // ritorna un array prendo il primo (dovrebbe essere solo 1)
+      task.title = newTaskTitle //aggiorno il titolo del task
+
+    }
   },
   actions: {
     addTask({commit},newTaskTitle) {
@@ -78,6 +85,10 @@ export default new Vuex.Store({
     deleteTask({commit},id){
       commit('deleteTask',id)
       commit('showSnackBar','Task deleted!')
+    },
+    updateTaskTitle({commit},payload){
+      commit('updateTaskTitle',payload)
+      commit('showSnackBar','Task updated!')
     }
   },
   getters: {

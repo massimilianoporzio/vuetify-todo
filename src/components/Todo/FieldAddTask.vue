@@ -1,22 +1,36 @@
 <template>
+
   <v-text-field class="pa-3"
                 outlined
                 hide-details
                 clearable
                 label="Add Task"
-                append-icon="mdi-plus-thick"
                 v-model="newTaskTitle"
-                @click:append="addTask"
                 @keyup.enter="addTask"
-  ></v-text-field></template>
+  >
+    <template v-slot:append>
+     <v-icon @click="addTask" color="primary" :disabled="newTaskTitleInvalid">
+       mdi-plus
+     </v-icon>
+    </template>
+  </v-text-field>
+</template>
 
 <script>
 export default {
   name: "FieldAddTask",
+  computed: {
+    newTaskTitleInvalid() {
+      return !this.newTaskTitle || this.newTaskTitle.trim() === ''
+    }
+  },
   methods:{
     addTask() {
-      this.$store.dispatch('addTask', this.newTaskTitle)
-      this.newTaskTitle = ''
+      if (!this.newTaskTitleInvalid){
+        this.$store.dispatch('addTask', this.newTaskTitle)
+        this.newTaskTitle = ''
+      }
+
     }
   },
   data: () => ({

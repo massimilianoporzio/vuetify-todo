@@ -15,13 +15,15 @@
         </v-list-item-content>
 
         <v-list-item-action>
-          <v-btn icon @click="$store.dispatch('deleteTask',task.id)">
-            <v-icon color="primary lighten-1">mdi-delete</v-icon>
-          </v-btn>
+<!--          <v-btn icon @click.stop="dialogs.delete = true">-->
+<!--            <v-icon color="primary lighten-1">mdi-delete</v-icon>-->
+<!--          </v-btn>-->
+          <task-menu :task="task"/>
         </v-list-item-action>
       </template>
     </v-list-item>
     <v-divider></v-divider>
+
   </div>
 </template>
 
@@ -33,7 +35,11 @@ export default {
       type: Object,
       required: true
     }
-  }
+  },
+  components: {
+    'task-menu' : require('@/components/Todo/TaskMenu').default
+  },
+
 }
 </script>
 
