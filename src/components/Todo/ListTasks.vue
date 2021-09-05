@@ -3,7 +3,7 @@
           flat
           class="pt-0"
   >
-  <task v-for="task in $store.state.tasks"
+  <task v-for="task in $store.getters.tasksFiltered"
         :key="task.id" :task="task"/>
 
 

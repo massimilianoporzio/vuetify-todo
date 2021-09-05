@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    search: null,
     snackbar: {
       show: false,
       text: 'I am a snackbar'
@@ -31,7 +32,10 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
-
+    setSearch(state,value){
+      // console.log('value:',value)
+      state.search = value
+    },
     hideSnackBar(state){
       state.snackbar.show = false
     },
@@ -105,7 +109,16 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    tasksFiltered (state) {
+      if(!state.search){
+        return state.tasks
+      }
+      else
+      {
+        return state.tasks.filter(t => t.title.toLowerCase().includes(state.search.toLowerCase()))
+      }
 
+    }
   },
   modules: {
   }
