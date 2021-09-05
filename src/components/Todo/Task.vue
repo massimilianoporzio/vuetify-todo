@@ -14,6 +14,16 @@
 
         </v-list-item-content>
 
+        <v-list-item-action v-if="task.dueDate">
+          <v-list-item-action-text>
+            <v-icon small>
+              mdi-calendar
+            </v-icon>
+            {{ task.dueDate | niceDate }}
+          </v-list-item-action-text>
+        </v-list-item-action>
+
+
         <v-list-item-action>
 <!--          <v-btn icon @click.stop="dialogs.delete = true">-->
 <!--            <v-icon color="primary lighten-1">mdi-delete</v-icon>-->
@@ -28,8 +38,15 @@
 </template>
 
 <script>
+import { format } from 'date-fns'
+import { it } from 'date-fns/locale'
 export default {
   name: "Task",
+  filters: {
+    niceDate(value){
+     return format(new Date(value), 'd MMM', {locale: it})
+    }
+  },
   props: {
     task: {
       type: Object,

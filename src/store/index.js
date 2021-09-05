@@ -13,21 +13,25 @@ export default new Vuex.Store({
       {
         id: 1,
         title: 'Wake up',
-        done: false
+        done: false,
+        dueDate: '2021-10-16'
       },
       {
         id: 2,
         title: 'Get bananas',
-        done: true
+        done: true,
+        dueDate: '2021-10-17'
       },
       {
         id: 3,
         title: 'Eat bananas',
-        done: false
+        done: false,
+        dueDate: null
       }
     ],
   },
   mutations: {
+
     hideSnackBar(state){
       state.snackbar.show = false
     },
@@ -45,13 +49,18 @@ export default new Vuex.Store({
       }, timeout)
 
     },
+    setTaskDueDate(state,payload) {
+      let task = state.tasks.filter(t => t.id === payload.id)[0] // ritorna un array prendo il primo
+      task.dueDate = payload.dueDate
+    },
     addTask(state, newTaskTitle) {
       if(newTaskTitle !== '')
       {
         let newTask = {
           id: Date.now(),
           title: newTaskTitle,
-          done: false
+          done: false,
+          dueDate: null
         }
         state.tasks.push(newTask)
         // this.newTaskTitle = '' //clearing
@@ -89,6 +98,10 @@ export default new Vuex.Store({
     updateTaskTitle({commit},payload){
       commit('updateTaskTitle',payload)
       commit('showSnackBar','Task updated!')
+    },
+    updateTaskDueDate({commit},payload){
+      commit('setTaskDueDate',payload)
+      commit('showSnackBar','Due Date updated!')
     }
   },
   getters: {
