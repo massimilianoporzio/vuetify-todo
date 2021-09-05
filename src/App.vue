@@ -77,6 +77,7 @@
     <v-main>
       <!--  -->
       <router-view></router-view>
+      <snackbar/>
     </v-main>
   </v-app>
 </template>
@@ -92,5 +93,9 @@ export default {
         ]
       }
   ),
+  components: {
+    //usati in tutta la app
+    'snackbar' : require('@/components/Shared/SnackBar.vue').default
+  }
 }
 </script>

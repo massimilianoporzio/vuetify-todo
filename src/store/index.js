@@ -5,6 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    snackbar: {
+      show: false,
+      text: 'I am a snackbar'
+    },
     tasks: [
       {
         id: 1,
@@ -24,6 +28,23 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
+    hideSnackBar(state){
+      state.snackbar.show = false
+    },
+    showSnackBar(state, text){
+      let timeout=0 // timout si può usare SE NON CAMBIO LO STATE!!!
+      if(state.snackbar.show){
+        state.snackbar.show = false // prima chiudo quello che è a video
+        timeout = 300
+      }
+      setTimeout( () => {
+        state.snackbar.show = true
+        if (text){
+          state.snackbar.text = text
+        }
+      }, timeout)
+
+    },
     addTask(state, newTaskTitle) {
       if(newTaskTitle !== '')
       {
@@ -50,6 +71,14 @@ export default new Vuex.Store({
       }
   },
   actions: {
+    addTask({commit},newTaskTitle) {
+      commit('addTask',newTaskTitle)
+      commit('showSnackBar','Task added!')
+    },
+    deleteTask({commit},id){
+      commit('deleteTask',id)
+      commit('showSnackBar','Task deleted!')
+    }
   },
   getters: {
 
