@@ -6,6 +6,7 @@
       @input="$store.commit('setSearch',$event)"
       @focus="searchClosed=false"
       @blur="searchClosed=true"
+      :disabled="$store.state.sorting"
       placeholder="Search"
       prepend-inner-icon="mdi-magnify"
       filled

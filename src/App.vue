@@ -96,6 +96,13 @@ export default {
         ]
       }
   ),
+  mounted() {
+    //PRENDO DATI DA DB LOCALE E METTO IN STORE
+    //SE NO LI PRENDO DA API DA REMOTO E LI METTO SU SB LOCALE e
+    //POI LI RIPRENDO DA DB LOCALE
+    //USO ACTION PERCHé ASINCRONA SU LOACLDB e/o eventuale API
+    this.$store.dispatch('getTasks')
+  },
   components: {
     //usati in tutta la app
     'snackbar' : require('@/components/Shared/SnackBar.vue').default,

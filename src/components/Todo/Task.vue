@@ -7,7 +7,7 @@
     >
       <template>
         <v-list-item-action>
-          <v-checkbox @click="$store.commit('doneTask',task.id)"
+          <v-checkbox @click="$store.dispatch('doneTask',task.id)"
                       :input-value="task.done"
                       color="primary"
           ></v-checkbox>

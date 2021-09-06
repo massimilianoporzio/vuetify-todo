@@ -26,7 +26,8 @@ export default {
         return this.$store.getters.tasksFiltered
       },
       set(value) {
-        this.$store.commit('setTasks', value)
+        console.log('PRIMA DELLA ACTION VALUE IS',value)
+        this.$store.dispatch('setTasks', value) // passo solo quelli filtrati
       }
     }
   },

@@ -84,7 +84,13 @@ export default {
         title: 'Sort',
         icon: 'mdi-drag-horizontal-variant',
         click() {
-         this.$store.commit('toggleSorting')
+          if(!this.$store.state.search) // PERMETTO IL RIORDINO SOLO SE NON STO FILTRANDO
+          {
+            this.$store.commit('toggleSorting')
+          }
+          else{
+            this.$store.commit('showSnackBar','Cannot sort when filtering')
+          }
 
         }
       },
