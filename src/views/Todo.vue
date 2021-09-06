@@ -3,6 +3,7 @@
     <field-add-task/>
     <list-tasks v-if="$store.state.tasks.length"/>
     <no-tasks v-else/>
+    <btn-done-sorting v-if="$store.state.sorting"/>
 
   </div>
 
@@ -15,7 +16,8 @@ export default {
   components: {
     'field-add-task': require('@/components/Todo/FieldAddTask').default,
     'list-tasks' : require('@/components/Todo/ListTasks').default,
-    'no-tasks' : require('@/components/Todo/NoTasks').default
+    'no-tasks' : require('@/components/Todo/NoTasks').default,
+    'btn-done-sorting' : require('@/components/Todo/ButtonDoneSorting').default
   },
 
 }

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <v-list-item :class="{'blue lighten-5':task.done}">
+    <v-list-item
+        :class="{'blue lighten-5':task.done}"
+       :ripple="false"
+        class="white"
+    >
       <template>
         <v-list-item-action>
           <v-checkbox @click="$store.commit('doneTask',task.id)"
@@ -29,6 +33,15 @@
 <!--            <v-icon color="primary lighten-1">mdi-delete</v-icon>-->
 <!--          </v-btn>-->
           <task-menu :task="task"/>
+        </v-list-item-action>
+        <v-list-item-action v-if="$store.state.sorting">
+          <v-btn class="handle"
+              color="primary"
+              icon
+
+          >
+            <v-icon>mdi-drag-horizontal-variant</v-icon>
+          </v-btn>
         </v-list-item-action>
       </template>
     </v-list-item>
@@ -59,4 +72,9 @@ export default {
 
 }
 </script>
-
+<style lang="sass">
+.sortable-ghost
+  opacity: 0
+.sortable-drag
+  box-shadow: 0 0 10px rgba(0,0,0,0.3)
+</style>

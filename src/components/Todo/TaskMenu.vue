@@ -3,7 +3,7 @@
     <v-menu
         bottom
         left
-        :close-on-click="true"
+
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -20,7 +20,7 @@
         <v-list-item
             v-for="(item, index) in items"
             :key="index"
-            @click.stop="handleClick(index)"
+            @click="handleClick(index)"
         >
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
@@ -51,10 +51,12 @@ export default {
     }
   },
   data: () => ({
+    closeOnContentClick : true,
     dialogs: {
       edit: false,
       delete : false,
-      dueDate: false
+      dueDate: false,
+
     },
     items: [
       {
@@ -76,6 +78,14 @@ export default {
         icon: 'mdi-delete',
         click() {
           this.dialogs.delete = true
+        }
+      },
+      {
+        title: 'Sort',
+        icon: 'mdi-drag-horizontal-variant',
+        click() {
+         this.$store.commit('toggleSorting')
+
         }
       },
     ],

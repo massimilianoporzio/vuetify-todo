@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     appTitle : process.env.VUE_APP_TITLE,
+    sorting: false,
     search: null,
     snackbar: {
       show: false,
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
+    setTasks(state,newTasks){
+      state.tasks = newTasks
+    },
     setSearch(state,value){
       // console.log('value:',value)
       state.search = value
@@ -89,6 +93,9 @@ export default new Vuex.Store({
       let task = state.tasks.filter(t => t.id === id)[0] // ritorna un array prendo il primo (dovrebbe essere solo 1)
       task.title = newTaskTitle //aggiorno il titolo del task
 
+    },
+    toggleSorting(state){
+      state.sorting = !state.sorting
     }
   },
   actions: {
