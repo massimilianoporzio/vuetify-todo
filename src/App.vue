@@ -6,8 +6,8 @@
         :mobile-breakpoint="768"
     >
       <v-img class="pa-4 pt-7"
-          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
-         height="170"
+          gradient="to top right, rgba(19,84,122,.7), rgba(128,208,199,.9)"
+         height="230"
          src="waves.jpg"
       >
         <v-row justify="space-around" class="mb-3">
@@ -53,25 +53,28 @@
         color="primary"
         dark
         src="waves.jpg"
-               height="170"
+               height="230"
  >
       <template v-slot:img="{ props }">
         <v-img
             v-bind="props"
-            gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+            gradient="to top right, rgba(19,84,122,.7), rgba(128,208,199,.9)"
         ></v-img>
       </template>
       <v-container class="pa-0 pt-1 mx-0">
         <v-row>
           <v-app-bar-nav-icon  @click="drawer = !drawer"></v-app-bar-nav-icon>
           <v-spacer></v-spacer>
-          <search/>
+          <search v-if="$route.path==='/'"/>
         </v-row>
         <v-row>
           <v-toolbar-title class="text-h4 ml-4">{{$store.state.appTitle}}</v-toolbar-title>
         </v-row>
         <v-row>
           <live-date-time/>
+        </v-row>
+        <v-row v-if="$route.path==='/'">
+          <field-add-task/>
         </v-row>
       </v-container>
 
@@ -107,7 +110,8 @@ export default {
     //usati in tutta la app
     'snackbar' : require('@/components/Shared/SnackBar.vue').default,
     'search' : require('@/components/Tools/Search').default,
-    'liveDateTime':require('@/components/Tools/LiveDateTime').default
+    'liveDateTime':require('@/components/Tools/LiveDateTime').default,
+    'field-add-task': require('@/components/Todo/FieldAddTask').default,
   }
 }
 </script>

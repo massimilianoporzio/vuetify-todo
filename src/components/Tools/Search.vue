@@ -45,8 +45,8 @@ export default {
 </style>
 
 <style lang="sass">
-.v-input--is-focused
-  .v-input__slot
-    color: transparent !important
+//.v-input--is-focused
+//  .v-input__slot
+//    color: transparent !important
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <field-add-task/>
+
     <div v-if="loadingStatus" class="mt-12">
       <v-progress-circular class="spinner"
                            :size="130"
@@ -16,7 +16,7 @@
       </v-progress-circular>
     </div>
     <div v-else>
-      <list-tasks v-if="$store.state.tasks.length"/>
+      <list-tasks class="mt-4"  v-if="$store.state.tasks.length"/>
       <no-tasks v-if=" tasks.length===0"/>
       <btn-done-sorting v-if="$store.state.sorting"/>
     </div>
@@ -31,7 +31,7 @@
 export default {
   name: "Todo",
   components: {
-    'field-add-task': require('@/components/Todo/FieldAddTask').default,
+
     'list-tasks' : require('@/components/Todo/ListTasks').default,
     'no-tasks' : require('@/components/Todo/NoTasks').default,
     'btn-done-sorting' : require('@/components/Todo/ButtonDoneSorting').default
