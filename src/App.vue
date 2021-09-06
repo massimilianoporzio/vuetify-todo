@@ -1,18 +1,32 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Vuetify Todo
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            Best todo ever
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+    <v-navigation-drawer
+        v-model="drawer"
+        app
+        :mobile-breakpoint="768"
+    >
+      <v-img class="pa-4 pt-7"
+          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+         height="170"
+         src="waves.jpg"
+      >
+        <v-row justify="space-around" class="mb-3">
+          <v-avatar size="70" class="mx-auto mb-3">
+            <img
+                src="massi.jpg"
+                alt="Massimiliano Porzio"
+            >
 
-      <v-divider></v-divider>
+          </v-avatar >
+        </v-row>
+
+        <div class="white--text text-subtitle-1 font-weight-bold">
+          Massimiliano Porzio
+        </div>
+        <div class="white--text text-subtitle-2">
+          massi_porzio
+        </div>
+      </v-img>
 
       <v-list
           dense
@@ -39,6 +53,7 @@
         color="primary"
         dark
         src="waves.jpg"
+               height="170"
  >
       <template v-slot:img="{ props }">
         <v-img
@@ -53,16 +68,14 @@
           <search/>
         </v-row>
         <v-row>
-          <v-toolbar-title class="ml-4">Vuetify Todo</v-toolbar-title>
+          <v-toolbar-title class="text-h4 ml-4">{{$store.state.appTitle}}</v-toolbar-title>
+        </v-row>
+        <v-row>
+          <live-date-time/>
         </v-row>
       </v-container>
 
     </v-app-bar>
-
-
-
-
-
 
     <v-main>
       <!--  -->
@@ -86,7 +99,8 @@ export default {
   components: {
     //usati in tutta la app
     'snackbar' : require('@/components/Shared/SnackBar.vue').default,
-    'search' : require('@/components/Tools/Search').default
+    'search' : require('@/components/Tools/Search').default,
+    'liveDateTime':require('@/components/Tools/LiveDateTime').default
   }
 }
 </script>
